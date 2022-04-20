@@ -1,5 +1,5 @@
 from typing import List
-
+from leetcode.problems.utils.driver import Driver
 
 class Solution:
 
@@ -16,7 +16,7 @@ class Solution:
                 start_index = midpoint + 1
             else:
                 end_index = midpoint - 1
-        
+
         if nums[midpoint] < target:
             return start_index
         else:
@@ -24,35 +24,25 @@ class Solution:
 
 
 if __name__ == '__main__':
-    test_cases = {
+    input = {
+        0: {
+            "nums": [1, 3, 5, 6],
+            "target": 5
+        },
         1: {
             "nums": [1, 3, 5, 6],
-            "target": 5,
-            "output": 2
+            "target": 2
         },
         2: {
             "nums": [1, 3, 5, 6],
-            "target": 2,
-            "output": 1
+            "target": 7
         },
         3: {
             "nums": [1, 3, 5, 6],
-            "target": 7,
-            "output": 4
-        },
-        4: {
-            "nums": [1, 3, 5, 6],
-            "target": 0,
-            "output": 0
+            "target": 0
         }
-    }
 
-for case in test_cases:
-    print(f"\nExecuting Test Case #{case}...")
-    
-    result = Solution.searchInsert(test_cases[case]["nums"], test_cases[case]["target"])
-    
-    if result != test_cases[case]["output"]:
-        print(f"Test Failed. Expected Output = {test_cases[case]['output']} but Result = {result}")
-    else:
-        print("Test Passed!")
+    }
+    output = [2, 1, 4, 0]
+
+    Driver.run_test_cases(Solution.searchInsert, input, output)
