@@ -3,7 +3,8 @@ from leetcode.problems.utils.data_structures.single_linked_list import SingleLin
 from typing import Optional
 
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+    @staticmethod
+    def mergeTwoLists(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         
         # Edge case: One list is finished and the other is incomplete
         if not list1 or not list2:
@@ -12,10 +13,10 @@ class Solution:
         # return the smaller of either list
         # recursive function call determines the next pointer
         if list1.val <= list2.val:
-            list1.next = self.mergeTwoLists(list1.next, list2)
+            list1.next = Solution.mergeTwoLists(list1.next, list2)
             return list1
         else:
-            list2.next = self.mergeTwoLists(list1, list2.next)
+            list2.next = Solution.mergeTwoLists(list1, list2.next)
             return list2
         
 def main():
@@ -38,6 +39,33 @@ def main():
         [],
         [0]
     ]
+    
+    for key, test_case in input.items():
+        
+        print("Input: ", end="")
+        for list in test_case.values():
+            my_list = SingleLinkedList()
+            for value in list:
+                my_list.add_node(value)
+            SingleLinkedList.print_list(my_list.head)
+        print("")
+        
+    for test_case in input.values():
+        l1 = SingleLinkedList()
+        l2 = SingleLinkedList()
+        
+        for value in test_case['list1']:
+            l1.add_node(value)
+        
+        for value in test_case['list2']:
+            l2.add_node(value)
+            
+        print("Output: ", end="")
+        head = Solution.mergeTwoLists(l1.head, l2.head)
+        SingleLinkedList.print_list(head)
+        print("")
+        
+
 
 if __name__ == '__main__':
     main()
