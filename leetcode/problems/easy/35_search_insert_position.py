@@ -2,6 +2,20 @@ from typing import List
 from leetcode.utils.driver import Driver
 
 class Solution:
+    """Key Point: This is a binary search that estimates the index of
+    a missing value rather than returning -1.
+
+    Link: https://leetcode.com/problems/search-insert-position/
+    
+    Method: Binary search algorithm. However, if the value is not found: 
+        1) Midpoint is the last one calculated when start_index = end_index.
+        2) If the midpoint is < target, it means that the target should be in 
+        the next sequential index (start_index in my implementation).
+        3) Otherwise, it should be where the midpoint is (and the loop broke)
+    
+    Returns:
+        int: Index number of value in the List or where it should be if it exists.
+    """
 
     @staticmethod
     def searchInsert(nums: List[int], target: int) -> int:

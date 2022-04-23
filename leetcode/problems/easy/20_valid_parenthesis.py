@@ -1,6 +1,20 @@
 from leetcode.utils.driver import Driver
 
 class Solution:
+    """Key Point: Use a stack to store opening brackets. Pop to compare them to 
+    closing brackets.
+    
+    Link: https://leetcode.com/problems/valid-parentheses/
+    
+    Method: I chose to build a pattern dictionary to represent valid pairs of
+    brackets. Opening brackets (dict keys) are push onto a stack. When a closing 
+    bracket is encountered, the stack is popped. The value of dict[opening_bracket]
+    is compared to the encountered closing bracket. If there is a mismatch, then
+    the function returns False.
+
+    Returns:
+        bool: True if string contains brackets in correct order. False if not.
+    """
     @staticmethod
     def isValid(s: str) -> bool:
         closing_parens = {

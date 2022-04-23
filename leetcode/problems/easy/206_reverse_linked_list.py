@@ -3,6 +3,17 @@ from leetcode.data_structures.single_linked_list import SingleLinkedList
 from typing import Optional
         
 class Solution:
+    """Key Point: Current, next and prev hold the structure of the linked list as you are
+    reversing the direction of the pointers.
+    
+    Link: https://leetcode.com/problems/reverse-linked-list/
+    
+    Method: Current, next and prev hold the structure of the linked list as you are
+    reversing the direction of the pointers.
+
+    Returns:
+        ListNode: Head of the reversed linked list.
+    """
     @staticmethod
     def reverseList(head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:

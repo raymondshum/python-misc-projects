@@ -2,6 +2,19 @@ from leetcode.utils.driver import Driver
 from typing import List
 
 class Solution:
+    """Key Point: Cut the breadth of the search area in half at every iteration.
+    
+    Link: https://leetcode.com/problems/binary-search/
+    
+    Method: At each iteration of the loop, calculate a pivot (midpoint) that is between
+    the two endpoints. Initially, the endpoints are the ends of the array. If the midpoint
+    is larger than the target, then the next search area is the lower half of the array (and
+    upper half if it is larger). This repeats until the value is found or the array is
+    exhausted.
+
+    Returns:
+        int: index of the target number or -1 if it is not found.
+    """
     @staticmethod
     def search(nums: List[int], target: int) -> int:
         left_pointer = 0

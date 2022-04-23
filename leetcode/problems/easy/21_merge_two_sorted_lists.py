@@ -3,9 +3,22 @@ from leetcode.data_structures.single_linked_list import SingleLinkedList
 from typing import Optional
 
 class Solution:
+    """Key Point: Account for ragged edges (uneven lists).
+    
+    Link: https://leetcode.com/problems/merge-two-sorted-lists/
+    
+    Method: Most of the logic is used to account for uneven lists. If
+    either list is missing, the remaining is immediately returned. This
+    method recursively compares each node from one list against the 
+    other. The until the base case (at least one null list) is reached. At
+    each method call, the smaller of either node (or node from list1 if
+    equal) is ultimately returned.
+
+    Returns:
+        ListNode: Head of merged List.
+    """
     @staticmethod
     def mergeTwoLists(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        
         # Edge case: One list is finished and the other is incomplete
         if not list1 or not list2:
             return list1 or list2
