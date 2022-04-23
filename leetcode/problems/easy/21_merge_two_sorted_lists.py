@@ -1,5 +1,5 @@
-from leetcode.problems.utils.data_structures.list_node import ListNode
-from leetcode.problems.utils.data_structures.single_linked_list import SingleLinkedList
+from leetcode.data_structures.list_node import ListNode
+from leetcode.data_structures.single_linked_list import SingleLinkedList
 from typing import Optional
 
 class Solution:

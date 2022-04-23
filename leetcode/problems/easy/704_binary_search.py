@@ -1,4 +1,4 @@
-from leetcode.problems.utils.driver import Driver
+from leetcode.utils.driver import Driver
 from typing import List
 
 class Solution:

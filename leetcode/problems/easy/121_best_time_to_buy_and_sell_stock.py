@@ -1,5 +1,5 @@
 from typing import List
-from leetcode.problems.utils.driver import Driver
+from leetcode.utils.driver import Driver
 
 class Solution:
     @staticmethod
