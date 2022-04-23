@@ -1,6 +1,5 @@
 import os
-import re
-from typing import List, TextIO, Tuple
+from typing import List
 
 class ReadmeGenerator:
     
