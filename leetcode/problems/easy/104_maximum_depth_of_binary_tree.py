@@ -2,7 +2,7 @@ from leetcode.data_structures.tree_node import TreeNode, bfs_print
 from typing import Optional
 
 class Solution:
-    """Key Point: Ideal solution is to do DFS. This is a BFS that returns max count.
+    """Key Point: Use recursive DFS to get the max depth.
     
     Link: https://leetcode.com/problems/maximum-depth-of-binary-tree/
     
