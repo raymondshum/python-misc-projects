@@ -14,11 +14,10 @@ class Solution:
     Returns: 
         Int: Max depth of tree
     """
-    def maxDepth(self, root: Optional[TreeNode], count: int = 0) -> int:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
         
-        current_count = count + 1
         left_count = self.maxDepth(root.left, 0)
         right_count = self.maxDepth(root.right, 0)
-        return current_count + max(left_count, right_count)
+        return 1 + max(left_count, right_count)
