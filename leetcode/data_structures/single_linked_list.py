@@ -1,4 +1,4 @@
-from leetcode.problems.utils.data_structures.list_node import ListNode
+from leetcode.data_structures.list_node import ListNode
 
 class SingleLinkedList:
     def __init__(self):
