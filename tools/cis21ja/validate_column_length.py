@@ -1,5 +1,5 @@
 FILE_PATH = r"C:\Users\rshum\Documents\De Anza\CIS 21JA\Projects\Project32_VS2017\assignment_3.asm"
-MAX_COLUMN_WIDTH = 80
+MAX_COLUMN_WIDTH = 78
 
 def read_file(file_path):
     with open(file_path, 'r') as reader:
@@ -16,8 +16,6 @@ def visualize_file(lines):
     print(f'{line_number: <4}{character_count: <3}{"":=<80}')
     
     for index, line in enumerate(lines):
-        line = line.replace("\t","    ")
-        line = line.replace("\n","")
         print(f'{index+1: <4}{len(line): <3}{line}')
 
 def audit_file(lines, max_column_width):
