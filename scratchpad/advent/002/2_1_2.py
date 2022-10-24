@@ -53,7 +53,7 @@ class AttackSubmarine(Submarine):
 
 
 def main():
-    file_path = r"C:\Users\rshum\Documents\CSUMB\Misc Projects\python\scratchpad\advent\002\input.txt"
+    file_path = r"input.txt"
     input = Utils.read_file(file_path)
     input = [line.strip().replace("\n", "") for line in input]
     

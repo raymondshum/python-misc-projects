@@ -1,7 +1,7 @@
 from scratchpad.advent.utils.utils import Utils
 
 def main():
-    file_path = r"C:\Users\rshum\Documents\CSUMB\Misc Projects\python\scratchpad\advent\001\input.txt" 
+    file_path = r"input.txt" 
     file_lines = Utils.format_file_lines(Utils.read_file(file_path))
     
     count = 0
