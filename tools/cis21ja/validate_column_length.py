@@ -1,4 +1,4 @@
-FILE_PATH = r"C:\Users\rshum\Documents\De Anza\CIS 21JA\Projects\Project32_VS2017\assignment_3.asm"
+FILE_PATH = r"C:\Users\rshum\Documents\De Anza\CIS 21JA\Projects\Project32_VS2017\assignment_6.asm"
 MAX_COLUMN_WIDTH = 78
 
 def read_file(file_path):
