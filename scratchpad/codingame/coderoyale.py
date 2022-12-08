@@ -31,7 +31,7 @@ class Site:
     # owner: -1 = No structure, 0 = Friendly, 1 = Enemy
     owner_types = {
         -1: "No structure",
-        0: "Friendly owner",
+        0: "Player owner",
         1: "Enemy owner",
         None: "Not Init."
     }
@@ -77,6 +77,9 @@ class Unit:
         None: "Not init."
     }
 
+    QUEEN_RADIUS = 30
+    QUEEN_MAX_DISTANCE = 60
+
     def __init__(self, x, y, owner, unit_type, health):
         self.x = x
         self.y = y
@@ -93,10 +96,11 @@ class Unit:
 class Game:
 
     def __init__(self):
+        self.site_list: list[Site] = []
         self.num_sites, self.site_list = self.load_sites()
         self.gold = 0
         self.touched_site = 0
-        self.unit_list = None
+        self.unit_list = []
     
     def load_sites(self):
         num_sites = int(input())
@@ -122,15 +126,70 @@ class Game:
             x, y, owner, unit_type, health = [int(j) for j in input().split()]
             self.unit_list.append(Unit(x, y, owner, unit_type, health))
     
+    def get_queen_move(self):
+        queen = self._get_queen()
+        closest_site = self._get_closest_capturable_site(queen)
+        if (queen_is_touching_site := self.touched_site != -1) \
+            and (site_is_unbuilt := self.site_list[self.touched_site].owner == -1):
+            # get type to build
+            unit_type = "KNIGHT"
+            return f"BUILD {self.touched_site} BARRACKS-{unit_type}"
+        elif closest_site:
+            return f"MOVE {closest_site.x} {closest_site.y}"
+        else:
+            return "WAIT"
+
+    def _get_queen(self):
+        for unit in self.unit_list:
+            if Unit.unit_types.get(unit.unit_type) == "Queen":
+                return unit
+
+    def _get_closest_capturable_site(self, queen):
+        capturable_sites = [site for site in self.site_list \
+            if site.owner == (unbuilt := -1) and self.touched_site != site.site_id]
+
+        closest_site = None
+        min_distance = math.inf
+        for site in capturable_sites:
+            distance = self._getDistanceFromQueentToSite(queen, site)
+            if distance < min_distance:
+                closest_site = site
+                min_distance = distance
+        return closest_site
+    
+    def _getDistanceFromQueentToSite(self, queen, site):
+        return math.sqrt( (queen.x - site.x) ** 2 + (queen.y - site.y) ** 2 )
+    
+    def get_train_move(self):
+        ready_barracks: list[Site] = self._get_ready_barracks()
+        trainable_units = self.gold // 80
+        if trainable_units == 0 or not ready_barracks :
+            return "TRAIN"
+        else:
+            barracks_nums = ""
+            for barracks in ready_barracks:
+                if self.gold - 80 < 0:
+                    break
+                barracks_nums += f"{barracks.site_id} "
+                self.gold -= 80
+            return f"TRAIN {barracks_nums}".strip()
+    
+    def _get_ready_barracks(self):
+        return [site for site in self.site_list \
+            if site.owner == (player := 0) and site.param1 == 0]
+
     def main(self):
         while True:
             self.load_current_turn_status()
             Utils.print_status(self.site_list, self.unit_list)
 
+            queen_move = self.get_queen_move()
+            train_move = self.get_train_move()
+
             # First line: A valid queen action
             # Second line: A set of training instructions
-            print("WAIT")
-            print("TRAIN")
+            print(queen_move)
+            print(train_move)
 
 if __name__ == "__main__":
     theGame = Game()
