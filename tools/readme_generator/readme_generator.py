@@ -35,6 +35,14 @@ class ReadmeGenerator:
         if processed_text:
             content["Key Point"],processed_text =processed_text.split("Link: ", 1)
             content["Link"],processed_text =processed_text.split("Method: ", 1)
+
+            #TODO: Extract and call in another generalized processing step
+            # Processes docstring link into .md link
+            raw_text = content.get("Link", "")
+            problem_name = content.get("File Name", "").removesuffix(".py")
+            formatted_problem_name = " ".join(problem_name.split("_")[1:]) # Gets rid of the index value at the front
+            content["Link"] = f"[{formatted_problem_name}]({raw_text})"
+
             content["Method"], content["Returns"] = processed_text.split("Returns: ")
         return content
     
