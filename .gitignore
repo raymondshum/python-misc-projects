@@ -157,7 +157,7 @@ cython_debug/
 #.idea/
 
 ### VisualStudioCode ###
-*.code-workspace
+# *.code-workspace
 .vscode
 .vscode/*
 !.vscode/settings.json
