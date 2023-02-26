@@ -28,7 +28,7 @@ class ReadmeGenerator:
 
     def _build_content_dictionary(self, processed_text: str, file_path: str) -> dict[str, str]:
         content = {}
-        content["File Name"] = file_path.rsplit("\\", 1)[1]
+        content["File Name"] = file_path.rsplit(os.sep, 1)[1]
         processed_text = processed_text.replace("Key Point: ", "")
         
         # TODO: turn this into an exception
@@ -92,22 +92,28 @@ class ReadmeGenerator:
     def _sort_list_by_numeric_value(self, list: list[str]) -> list[str]:
         list.sort(key=lambda name: int(''.join(filter(str.isdigit, name))))
     
+    def write_docstring_to_md(self, directory_path: str):
+        files = self._get_all_files_in_directory(directory_path)
+        print(files)
+
+        for file in files:
+            dict = self.read_py_file(file)
+            markdown = self._format_dictionary_to_markdown(dict)
+            self._append_markdown(markdown)
+
+        print(self.markdown_master_document)
+        self.write_readme(directory_path)
+    
+    def write_all_directories_to_md(self, directory_paths: list[str]):
+        for directory_path in directory_paths:
+            self.write_docstring_to_md(directory_path)
     
 def main():
+    directories = [
+        "/workspaces/python-misc-projects/leetcode/problems/easy/"
+    ]
     test = ReadmeGenerator()
-    file_path = "C:\\Users\\rshum\\Documents\\CSUMB\\Misc Projects\\python\\leetcode\\problems\\easy\\1_two_sum.py"
-    directory_path = "C:\\Users\\rshum\\Documents\\CSUMB\\Misc Projects\\python\\leetcode\\problems\\easy\\"
-    
-    files = test._get_all_files_in_directory(directory_path)
-    print(files)
-
-    for file in files:
-        dict = test.read_py_file(file)
-        markdown = test._format_dictionary_to_markdown(dict)
-        test._append_markdown(markdown)
-
-    print(test.markdown_master_document)
-    test.write_readme(directory_path)
+    test.write_all_directories_to_md(directory_paths=directories)
 
 if __name__ == '__main__':
     main()
