@@ -39,8 +39,6 @@ class ReadmeGenerator:
             #TODO: Extract and call in another generalized processing step
             # Processes docstring link into .md link
             raw_text = content.get("Link", "")
-            # problem_name = content.get("File Name", "").removesuffix(".py")
-            # formatted_problem_name = " ".join(problem_name.split("_")[1:]) # Gets rid of the index value at the front
             problem_name = self._get_file_name_from_path(content.get("File Name", ""))
             content["Link"] = f"[{problem_name}]({raw_text})"
 
@@ -82,7 +80,7 @@ class ReadmeGenerator:
         file_names = [file_path.rsplit(os.sep, 1)[1].replace(".", "") for file_path in file_paths]
         md_string = "# Contents\n"
         for file_name in file_names:
-            md_string += f"- [{file_name}](#{file_name})\n"
+            md_string += f"- [{file_name[:-2]}](#{file_name})\n" # Truncate py suffix
         md_string += "\n"
         return md_string
     
