@@ -79,8 +79,8 @@ class ReadmeGenerator:
 
     def _get_toc(self, directory_path: str):
         file_paths = self._get_all_files_in_directory(directory_path=directory_path)
-        file_names = [file_path.rsplit(os.sep, 1)[1] for file_path in file_paths]
-        md_string = "#Contents\n"
+        file_names = [file_path.rsplit(os.sep, 1)[1].replace(".", "") for file_path in file_paths]
+        md_string = "# Contents\n"
         for file_name in file_names:
             md_string += f"- [{file_name}](#{file_name})\n"
         md_string += "\n"
@@ -93,7 +93,7 @@ class ReadmeGenerator:
         markdown = f"# {content_dictionary['File Name']}\n\n"
         for key, value in content_dictionary.items():
             markdown += f"**{key}**: {value}\n\n"
-        markdown += "---\n\n"
+        markdown += "\n[Return to Top](#contents)\n\n---\n\n"
         return markdown
     
     def _append_markdown(self, markdown_snippet: str):
