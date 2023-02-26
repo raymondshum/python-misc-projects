@@ -10,7 +10,7 @@ class ReadmeGenerator:
         self.markdown_master_document = ""
     
     def add_directory(self, directory_path: str):
-        if not self._directory_is_valid(directory_path):
+        if not self._directory_is_valid(directory_path=directory_path):
             raise Exception(f"Directory does not exist: {directory_path}")
         
         self.target_directories.append(directory_path)
@@ -19,12 +19,12 @@ class ReadmeGenerator:
         return os.path.isdir(directory_path)
     
     def read_py_file(self, file_path: str):
-        if not self._file_is_valid(file_path):
+        if not self._file_is_valid(file_path=file_path):
             raise Exception("File does not exist: {file_path}")
         
-        raw_text = self._extract_text(file_path)
-        processed_text = self._format_list_to_text(raw_text)
-        return (content_dictionary := self._build_content_dictionary(processed_text, file_path))
+        raw_text = self._extract_text(file_path=file_path)
+        processed_text = self._format_list_to_text(raw_text=raw_text)
+        return (content_dictionary := self._build_content_dictionary(processed_text=processed_text, file_path=file_path))
 
     def _build_content_dictionary(self, processed_text: str, file_path: str) -> dict[str, str]:
         content = {}
@@ -59,7 +59,7 @@ class ReadmeGenerator:
         return extracted_text.replace(self.DELIMITER, "")
     
     def _file_is_valid(self, file_path: str) -> bool:
-        return os.path.isfile(file_path)
+        return os.path.isfile(path=file_path)
     
     def write_readme(self, directory_path: str):
         with open(f"{directory_path}README.md", "w+") as file:
@@ -93,20 +93,20 @@ class ReadmeGenerator:
         list.sort(key=lambda name: int(''.join(filter(str.isdigit, name))))
     
     def write_docstring_to_md(self, directory_path: str):
-        files = self._get_all_files_in_directory(directory_path)
+        files = self._get_all_files_in_directory(directory_path=directory_path)
         print(files)
 
         for file in files:
             dict = self.read_py_file(file)
-            markdown = self._format_dictionary_to_markdown(dict)
-            self._append_markdown(markdown)
+            markdown = self._format_dictionary_to_markdown(content_dictionary=dict)
+            self._append_markdown(markdown_snippet=markdown)
 
         print(self.markdown_master_document)
-        self.write_readme(directory_path)
+        self.write_readme(directory_path=directory_path)
     
     def write_all_directories_to_md(self, directory_paths: list[str]):
         for directory_path in directory_paths:
-            self.write_docstring_to_md(directory_path)
+            self.write_docstring_to_md(directory_path=directory_path)
     
 def main():
     directories = [
