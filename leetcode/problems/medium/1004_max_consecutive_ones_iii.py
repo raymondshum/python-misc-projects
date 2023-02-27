@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     """
     Key Point: Sliding window. Window size is determined
