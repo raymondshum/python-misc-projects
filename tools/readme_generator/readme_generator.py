@@ -123,14 +123,20 @@ class ReadmeGenerator:
 
         print(self.markdown_master_document)
         self.write_readme(directory_path=directory_path)
+
+        # TODO: Extract to "clear buffer" method
+        self.target_directories = []
+        self.markdown_master_document = ""
     
     def write_all_directories_to_md(self, directory_paths: list[str]):
         for directory_path in directory_paths:
             self.write_docstring_to_md(directory_path=directory_path)
     
 def main():
+    leetcode_directory_path =  "/workspaces/python-misc-projects/leetcode/problems"
     directories = [
-        "/workspaces/python-misc-projects/leetcode/problems/easy/"
+        leetcode_directory_path + "/" + "easy/",
+        leetcode_directory_path + "/" + "medium/",
     ]
     test = ReadmeGenerator()
     test.write_all_directories_to_md(directory_paths=directories)
