@@ -3,7 +3,7 @@ from typing import Optional
 import math
 class Solution:
     """
-    Keypoint: Used DFS to traverse all nodes. 
+    Key point: Used DFS to traverse all nodes. 
 
     Link: https://leetcode.com/problems/minimum-depth-of-binary-tree/
 
