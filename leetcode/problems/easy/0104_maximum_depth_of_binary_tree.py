@@ -18,6 +18,6 @@ class Solution:
         if not root:
             return 0
         
-        left_count = self.maxDepth(root.left, 0)
-        right_count = self.maxDepth(root.right, 0)
-        return 1 + max(left_count, right_count)
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
+        return max(left, right) + 1
