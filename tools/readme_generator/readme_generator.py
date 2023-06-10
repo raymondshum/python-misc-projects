@@ -137,6 +137,7 @@ def main():
     directories = [
         leetcode_directory_path + "/" + "easy/",
         leetcode_directory_path + "/" + "medium/",
+        leetcode_directory_path + "/" + "hard/"
     ]
     test = ReadmeGenerator()
     test.write_all_directories_to_md(directory_paths=directories)
